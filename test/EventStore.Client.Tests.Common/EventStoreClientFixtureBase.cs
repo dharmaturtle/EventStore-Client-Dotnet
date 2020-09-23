@@ -72,7 +72,7 @@ namespace EventStore.Client {
 			=> new EventData(Uuid.NewUuid(), type, Encoding.UTF8.GetBytes($@"{{""x"":{index}}}"));
 
 		public virtual async Task InitializeAsync() {
-			await TestServer.Start().WithTimeout(TimeSpan.FromMinutes(5));
+			//await TestServer.Start().WithTimeout(TimeSpan.FromMinutes(5));
 			await Given().WithTimeout(TimeSpan.FromMinutes(5));
 			await When().WithTimeout(TimeSpan.FromMinutes(5));
 		}
@@ -82,7 +82,8 @@ namespace EventStore.Client {
 				disposable.Dispose();
 			}
 
-			return TestServer.DisposeAsync().AsTask();
+			return Task.CompletedTask;
+			//TestServer.DisposeAsync().AsTask();
 		}
 
 		public string GetStreamName([CallerMemberName] string? testMethod = null) {
